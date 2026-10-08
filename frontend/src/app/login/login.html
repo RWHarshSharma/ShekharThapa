@@ -1,0 +1,26 @@
+<main class="page">
+  <form class="card" (ngSubmit)="submit()" novalidate>
+    <h1>House Price Predictor</h1>
+    <p class="subtitle">{{ mode === 'login' ? 'Sign in to continue' : 'Create your account' }}</p>
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="username" [(ngModel)]="email" required />
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password"
+      [attr.autocomplete]="mode === 'login' ? 'current-password' : 'new-password'"
+      [(ngModel)]="password" required />
+
+    @if (error) {
+      <p class="error" role="alert">{{ error }}</p>
+    }
+
+    <button type="submit" [disabled]="busy">
+      {{ busy ? 'Please wait...' : mode === 'login' ? 'Sign in' : 'Create account' }}
+    </button>
+
+    <button type="button" class="link" (click)="toggleMode()">
+      {{ mode === 'login' ? 'New here? Create an account' : 'Already have an account? Sign in' }}
+    </button>
+  </form>
+</main>
